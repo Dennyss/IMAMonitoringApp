@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <Property name="LOGGER_HOME">/share/vsb/IMAMonitoring/logs</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="application" fileName="${LOGGER_HOME}/monitoring.log"
+                     filePattern="${LOGGER_HOME}/monitoring.%d{yyyy-MM-dd}_%i.log.gz">
+
+            <PatternLayout pattern="%d{ISO8601}{GMT} %-5p[%c{1}] - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com" level="debug" additivity="false" includeLocation="true">
+            <AppenderRef ref="application" />
+        </Logger>
+    </Loggers>
+
+</Configuration>
